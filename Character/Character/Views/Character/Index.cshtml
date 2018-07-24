@@ -1,0 +1,14 @@
+﻿@model Character.Models.name
+
+<div>
+    @if (DateTime.Now.Hour >= 12)
+    {
+        <p>Good Evening @Model </p>
+       
+   }
+
+    else
+    {
+        <p>Good Morning</p>
+    }
+</div>

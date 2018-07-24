@@ -1,0 +1,20 @@
+﻿@{
+    ViewData["Title"] = "Secondary Page";
+    var joe = "Joe";
+}
+<h1>Secondary View</h1>
+
+<input asp-for="@joe" />
+
+@model Lesson2.Model.Account
+@{
+    ViewBag.Title = "View1";
+}
+<h2>View1</h2>
+<form asp-controller="Account" asp-action="RegisterAddress" method="post">
+    Email:  <input asp-for="Email" /> <br />
+   
+    <button type="submit">Register</button>
+</form><div>
+    @Html.ActionLink("Back to List", "Index")
+</div>
