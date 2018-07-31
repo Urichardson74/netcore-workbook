@@ -19,7 +19,11 @@ namespace BaseProject.Controllers
         {
             return View();
         }
-
+        [Route("AutoComplete")]
+        public IActionResult Autocomplete()
+        {
+            return View();
+        }
         [Route("About")]
         public IActionResult About()
         {
