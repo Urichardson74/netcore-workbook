@@ -20,7 +20,7 @@ namespace Character.Controllers
             }
             else
             {
-                var Index = "Index2";
+                var Index = "_MyLayout";
                 return View(Index);
             }
         }
