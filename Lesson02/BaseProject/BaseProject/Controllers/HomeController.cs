@@ -24,12 +24,25 @@ namespace BaseProject.Controllers
         {
             return View();
         }
+
+        public IActionResult About(Name name)
+        {
+            Console.WriteLine(name.FirstName);
+            Console.WriteLine(name.LastName);
+
+            return View()
+            
+        }
         [Route("About")]
         public IActionResult About()
         {
             ViewData["Message"] = "Your application description page.";
-
-            return View();
+            var name = new Name
+            {
+                FirstName = "Ukiah",
+                LastName = "Richardson"
+            };
+            return View(name);
         }
 
         [Route("Privacy")]
