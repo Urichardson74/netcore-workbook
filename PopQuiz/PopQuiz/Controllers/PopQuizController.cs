@@ -15,5 +15,5 @@ namespace PopQuiz.Controllers
         {
             return View();
         }
-    }
+    } 
 }

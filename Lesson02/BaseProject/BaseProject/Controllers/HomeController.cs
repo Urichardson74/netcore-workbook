@@ -8,7 +8,7 @@ using BaseProject.Models;
 
 namespace BaseProject.Controllers
 {
-    
+
     [Route("Home")]
     public class HomeController : Controller
     {
@@ -19,30 +19,13 @@ namespace BaseProject.Controllers
         {
             return View();
         }
-        [Route("AutoComplete")]
-        public IActionResult Autocomplete()
-        {
-            return View();
-        }
 
-        public IActionResult About(Name name)
-        {
-            Console.WriteLine(name.FirstName);
-            Console.WriteLine(name.LastName);
-
-            return View()
-            
-        }
         [Route("About")]
         public IActionResult About()
         {
             ViewData["Message"] = "Your application description page.";
-            var name = new Name
-            {
-                FirstName = "Ukiah",
-                LastName = "Richardson"
-            };
-            return View(name);
+
+            return View();
         }
 
         [Route("Privacy")]
