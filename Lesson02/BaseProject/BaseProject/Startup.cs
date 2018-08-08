@@ -12,14 +12,18 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Logging;
 
 namespace BaseProject
 {
+    public class NotFoundException : Exception{}
+
     public class Startup
     {
         public Startup(IConfiguration configuration)
         {
             Configuration = configuration;
+                       
         }
 
         public IConfiguration Configuration { get; }
@@ -33,7 +37,8 @@ namespace BaseProject
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IHostingEnvironment env)
-        {
+        {   
+            app.UseMiddleware<CalculateTime>();
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
@@ -43,9 +48,14 @@ namespace BaseProject
                 app.UseExceptionHandler("/Home/Error");
             }
 
+
+
             app.UseStaticFiles();
 
             app.UseMvc();
+
+            app.UseMiddleware<UnwrapExceptionMiddleware>();
+          
         }
     }
 }
