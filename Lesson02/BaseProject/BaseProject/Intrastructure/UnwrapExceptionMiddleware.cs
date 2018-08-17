@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics.Contracts;
 using System.Linq;
 using System.Runtime.ExceptionServices;
 using System.Threading.Tasks;
@@ -21,6 +22,7 @@ namespace BaseProject.Intrastructure
         public async Task InvokeAsync(HttpContext context)
 
         {
+            Contract.Ensures(Contract.Result<Task>() != null);
             try
             {
                 await next(context);

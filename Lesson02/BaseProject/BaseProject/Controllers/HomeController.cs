@@ -11,13 +11,24 @@ namespace BaseProject.Controllers
 
     [Route("Home")]
     public class HomeController : Controller
+
+    private static string[] allowedUsers = new[]
+    {
+        "ukiah"
+    };
+
     {
         [Route("")]      // Combines to define the route template "Home"
         [Route("Index")] // Combines to define the route template "Home/Index"
         [Route("/")]     // Doesn't combine, defines the route template ""
         public IActionResult Index()
         {
+        if (allowedUsers.Contains(username))
             return View();
+        else
+            throw;
+          
+       
         }
 
         [Route("About")]

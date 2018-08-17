@@ -32,7 +32,11 @@ namespace BaseProject
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
+<<<<<<< HEAD
             services.AddSingleton<DateTimeProvider>(new DateTimeProvider());
+=======
+            services.AddSingleton<IDateTimeProvider>(new DateTimeProvider());
+>>>>>>> d2cabe8699f79eaeae611990f6a1049bed0b12a6
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
