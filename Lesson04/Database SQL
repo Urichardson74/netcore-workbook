@@ -1,0 +1,216 @@
+CREATE DATABASE Ukiah_Homework
+
+
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[User_Table](
+	[UserID] [int] NOT NULL,
+	[Active] [bit] NOT NULL,
+	[LastName] [varchar](20) NOT NULL,
+	[FirstName] [varchar](20) NOT NULL,
+	[Age] [int] NULL
+) ON [PRIMARY]
+GO
+ALTER TABLE [dbo].[User_Table] ADD PRIMARY KEY CLUSTERED 
+(
+	[UserID] ASC
+)WITH (STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ONLINE = OFF) ON [PRIMARY]
+GO
+
+
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[ContactInformation](
+	[ID] [int] NOT NULL,
+	[CellPhone] [int] NULL,
+	[HomePhone] [int] NULL,
+	[email] [varchar](30) NULL,
+	[PreferredMethod] [varchar](30) NULL,
+	[UserID] [int] NULL,
+	[AltCell] [int] NULL
+) ON [PRIMARY]
+GO
+ALTER TABLE [dbo].[ContactInformation] ADD PRIMARY KEY CLUSTERED 
+(
+	[ID] ASC
+)WITH (STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ONLINE = OFF) ON [PRIMARY]
+GO
+ALTER TABLE [dbo].[ContactInformation]  WITH CHECK ADD FOREIGN KEY([UserID])
+REFERENCES [dbo].[User_Table] ([UserID])
+GO
+
+
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[Employment](
+	[EmpID] [int] NOT NULL,
+	[EmployerName] [varchar](60) NULL,
+	[DateStart] [date] NULL,
+	[DateEnd] [date] NULL,
+	[UserID] [int] NULL,
+	[CurrentlyEmployed] [varchar](10) NULL
+) ON [PRIMARY]
+GO
+ALTER TABLE [dbo].[Employment] ADD PRIMARY KEY CLUSTERED 
+(
+	[EmpID] ASC
+)WITH (STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ONLINE = OFF) ON [PRIMARY]
+GO
+ALTER TABLE [dbo].[Employment]  WITH CHECK ADD FOREIGN KEY([UserID])
+REFERENCES [dbo].[User_Table] ([UserID])
+GO
+
+
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[Note](
+	[Notes] [varchar](300) NULL,
+	[ID] [int] NOT NULL
+) ON [PRIMARY]
+GO
+ALTER TABLE [dbo].[Note] ADD PRIMARY KEY CLUSTERED 
+(
+	[ID] ASC
+)WITH (STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ONLINE = OFF) ON [PRIMARY]
+GO
+
+
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[AuditLog](
+	[ID] [int] NULL,
+	[TimeLog] [time](7) NULL,
+	[DateLog] [date] NULL
+) ON [PRIMARY]
+GO
+
+
+DECLARE @count int = 1
+WHILE @count < 1000
+BEGIN
+DECLARE @active int 
+SET @active = FLOOR(RAND()*(1-0+1))+0
+DECLARE @Age int 
+SET @Age = FLOOR(RAND()*(90-18+1))+18
+
+
+
+    INSERT INTO User_Table (UserID, Active, FirstName, LastName, Age)
+    VALUES (@count, @Age,CONCAT('First Name ', @count), CONCAT('Last Name ', @count),@AGE)
+    SET @count = @count + 1
+
+    
+END
+
+
+DECLARE @count int = 1
+WHILE @count < 1000
+BEGIN
+DECLARE @current int 
+DECLARE @enddate DATE
+SET @current = FLOOR(RAND()*(3-0+1))+0
+IF @current > 1
+SET @enddate = NULL 
+ELSE
+SET @enddate = '12-31-' + Convert([varchar], FLOOR(RAND()*(2018-2015+1))+2015)
+
+
+    INSERT INTO Employment (EmpID, EmployerName, DateStart, DateEnd, UserID)
+    VALUES (@count, CONCAT('Employer Name ', @count),'01-01-' + Convert([varchar], FLOOR(RAND()*(2010-2000+1))+2000) ,
+   @enddate, @count)
+    SET @count = @count + 1
+    
+END
+
+
+DECLARE @count int = 1
+WHILE @count < 1000
+BEGIN
+DECLARE @phone1 int 
+SET @phone1 = FLOOR(RAND()*(9999999-0+1))+0
+DECLARE @phone2 int 
+SET @phone2 = FLOOR(RAND()*(9999999-0+1))+0
+DECLARE @phone3 int 
+SET @phone3 = FLOOR(RAND()*(9999999-0+1))+0
+DECLARE @rand int 
+SET @rand = FLOOR(RAND()*(2-0+1))+0
+DECLARE @rand2 int
+SET @rand2 = FLOOR(RAND()*(9-0+1))+0
+DECLARE @choice VARCHAR(20)
+DECLARE @altcell int
+IF @rand > 1
+SET @choice = 'Email' 
+ELSE IF @rand < 1
+SET @choice = 'Home Phone'
+ELSE
+SET @choice = 'Cell Phone'
+IF @rand2 = 0
+SET @altcell = @phone3
+ELSE 
+SET @altcell = null
+
+    INSERT INTO ContactInformation (ID, CellPhone, HomePhone, email, PreferredMethod, UserID, AltCell)
+    VALUES (@count,@phone1, @phone2, CONCAT('Email@', @count, '.com'), @choice, @count, @altcell)
+    SET @count = @count + 1
+    
+END
+
+//Begin Queries 
+
+SELECT FirstName, LastName, Age FROM User_Table
+
+
+SELECT FirstName, LastName, Age, CellPhone, HomePhone, email
+FROM User_Table JOIN ContactInformation ON User_Table.UserID = ContactInformation.UserID
+
+
+SELECT FirstName, LastName, Age, CellPhone, HomePhone, email,
+CASE
+    WHEN PreferredMethod = 'Email' THEN email
+    WHEN PreferredMethod = 'Cell Phone'THEN CellPhone
+    ELSE HomePhone
+END
+FROM User_Table JOIN ContactInformation ON User_Table.UserID = ContactInformation.UserID
+
+
+SELECT User_Table.LastName, Employment.EmployerName,
+FROM User_Table, Employment
+WHERE User_Table.UserID =Employment.UserID 
+AND EmployerName IS NOT NULL
+
+
+SELECT FirstName, LastName, Age FROM [User_Table]
+WHERE FirstName = LastName
+
+
+SELECT FirstName, LastName, Age, CellPhone, AltCell, email 
+FROM User_Table JOIN ContactInformation ON User_Table.UserID =ContactInformation.UserID
+WHERE CellPhone = AltCell
+
+
+SELECT User_Table.LastName, Employment.EmployerName
+FROM User_Table, Employment
+WHERE User_Table.UserID =Employment.UserID 
+AND EmployerName IS NOT NULL
+
+
+SELECT FirstName, LastName, age, CellPhone, email, PreferredMethod
+FROM [User_Table] JOIN ContactInformation ON User_Table.UserID = ContactInformation.UserID
+WHERE PreferredMethod IS NOT NULL
+
+SELECT User_Table.LastName, Employment.EmployerName
+FROM User_Table, Employment
+WHERE User_Table.UserID =Employment.UserID 
+AND EmployerName IS NOT NULL
+
+
