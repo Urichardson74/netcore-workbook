@@ -1,0 +1,15 @@
+﻿@@{
+    ViewData["Title"] = "Delete Provider";
+}
+@model  BaseProject.Models.Provider
+
+<h2>View1</h2>
+<form asp-controller="Customer" asp-action="Delete" method="post">
+    First Name:   <input asp-for="FirstName" /> <br />
+    Last Name:   <input asp-for="LastName" /> <br />
+    Phone:   <input asp-for="Phone" /> <br />
+    Email:  <input asp-for="Email" /> <br />
+    <button type="submit">Register</button>
+</form><div>
+    @Html.ActionLink("Back to List", "Index")
+</div>

@@ -1,0 +1,21 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp2.1</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.AspNetCore.App" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Remove="Views\Customer.cs" />
+    <Compile Remove="Views\Customer\EmptyClass.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Views\Customer\" />
+    <Folder Include="Views\Appointment\" />
+    <Folder Include="Views\Provider\" />
+    <Folder Include="Services\" />
+  </ItemGroup>
+</Project>
