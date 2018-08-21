@@ -12,17 +12,17 @@ namespace Checkpoint1.Controllers
 {
     public class ProviderController : Controller
     {
-        private MockDatabase _mockDatabase;
-        public ProviderController(MockDatabase mockData)
+        private MockDatabaseP _mockDatabaseP;
+        public ProviderController(MockDatabaseP mockDataP)
         {
-            _mockDatabase = mockData;
+            _mockDatabaseP = mockDataP;
         }
         // GET: Customers
         public IActionResult Index()
         {
-            var customers = _mockDatabase.GetAllCustomers();
+            var customers = _mockDatabaseP.GetAllProviders();
 
-            return View(customers);
+            return View(provider);
         }
         // GET: /<controller>/
         public IActionResult Create()
@@ -36,7 +36,7 @@ namespace Checkpoint1.Controllers
         {
             if (ModelState.IsValid)
             {
-                //_mockDatabase.Add();
+                _mockDatabaseP.Add();
                 return RedirectToAction(nameof(Index));
             }
             return View(provider);
