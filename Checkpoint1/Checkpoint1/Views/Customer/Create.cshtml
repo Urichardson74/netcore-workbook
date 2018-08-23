@@ -1,16 +1,26 @@
-﻿@{
+﻿
+@{
     ViewData["Title"] = "Create Customer";
 }
-@model  BaseProject.Models.Customer
+@model BaseProject.Models.Customer
 
-<h2>View1</h2>
-<form asp-controller="Customer" asp-action="Create" method="post">
-    First Name:   <input asp-for="FirstName" /> <br />
-    Last Name:   <input asp-for="LastName" /> <br />
-    Phone:   <input asp-for="Phone" /> <br />
-    Email:  <input asp-for="Email" /> <br />
 
-    <button type="submit">Register</button>
-</form><div>
-    @Html.ActionLink("Back to List", "Index")
-</div>
+
+<h2>Enter Customer Data</h2>
+
+<div class="form-group">
+    <form asp-controller="Customer" asp-action="Create" method="post">
+        <label>First Name</label> <br />
+        <input asp-for="FirstName" /> <br />
+        <label>Last Name</label> <br />
+        <input asp-for="LastName" /> <br />
+        <label>Phone</label> <br />                            
+         <input asp-for="Phone" /> <br />
+        <label>Email</label> <br />
+        <input asp-for="Email" /> <br />
+
+        <button type="submit">Register</button>
+    </form><</div>
+    <div>
+        @Html.ActionLink("Back to List", "Index")
+    </div>

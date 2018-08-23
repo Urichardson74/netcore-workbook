@@ -1,17 +1,21 @@
 ﻿@{
     ViewData["Title"] = "Create Provider";
 }
-@model  BaseProject.Models.Provider
+@model BaseProject.Models.Provider
+    <header>
+        Welcome to SPA Basic!
+    </header>
+    <body>
+        <h2>View1</h2>
+        <form asp-controller="Provider" asp-action="Create" method="post">
+            First Name:   <input asp-for="FirstName" /> <br />
+            Last Name:   <input asp-for="LastName" /> <br />
+            Specialty:  <input asp-for="Specialty" /> <br />
+            Phone:   <input asp-for="Phone" /> <br />
+            Email:  <input asp-for="Email" /> <br />
 
-<h2>View1</h2>
-<form asp-controller="Provider" asp-action="Create" method="post">
-    First Name:   <input asp-for="FirstName" /> <br />
-    Last Name:   <input asp-for="LastName" /> <br />
-    Specialty:  <input asp-for="Specialty" /> <br />
-    Phone:   <input asp-for="Phone" /> <br />
-    Email:  <input asp-for="Email" /> <br />
-
-    <button type="submit">Register</button>
-</form><div>
-    @Html.ActionLink("Back to List", "Index")
-</div>
+            <button type="submit">Register</button>
+        </form><div>
+            @Html.ActionLink("Back to List", "Index")
+        </div>
+    </body>

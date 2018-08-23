@@ -29,9 +29,35 @@ namespace Checkpoint1.Controllers
         [HttpPost]         [ValidateAntiForgeryToken]         public IActionResult Create([Bind("CustomerID,FirstName,LastName,Phone,Email")] Customer customer)         {             if (ModelState.IsValid)             {                 _mockDatabase.Add(customer);                 return RedirectToAction(nameof(Index));             }             return View(customer);         }
 
         // GET: /<controller>/
-        public IActionResult Delete()
+        public IActionResult Edit(Guid ID)
         {
-            return View();
+            
+                var a = _mockDatabase.FetchID(ID);
+
+                return View(a);
+            
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public IActionResult Edit(Customer customer)
+        {
+            if (ModelState.IsValid)
+            {   
+                
+                _mockDatabase.Update(customer);
+                return RedirectToAction(nameof(Index));
+            }
+            return View(customer);
+        }
+
+
+        // GET: /<controller>/
+        public IActionResult Delete(Guid ID)
+        {
+            var a = _mockDatabase.FetchID(ID);
+
+            return View(a);
         }
 
         [HttpPost]
@@ -40,7 +66,7 @@ namespace Checkpoint1.Controllers
         {
             if (ModelState.IsValid)
             {
-                //_mockDatabase.Delete(customer);
+                _mockDatabase.Delete(customer.CustomerID);
                 return RedirectToAction(nameof(Index));
             }
             return View(customer);

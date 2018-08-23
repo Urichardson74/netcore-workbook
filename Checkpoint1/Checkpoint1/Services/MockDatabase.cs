@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using BaseProject.Models;
+using Checkpoint1.Controllers;
 
 
 namespace BaseProject.Services
@@ -13,8 +14,7 @@ namespace BaseProject.Services
         {
             CustomerList = new List<Customer>()
             {
-                new Customer() { CustomerID = 1, FirstName = "John", LastName = "Doe"},
-                
+                new Customer() {  FirstName = "John", LastName = "Doe"},
 
             };
         }
@@ -25,12 +25,28 @@ namespace BaseProject.Services
 
         public void Add(Customer customer)
         {
+            customer.CustomerID = Guid.NewGuid();
             CustomerList.Add(customer);
         }
 
-        //public void Delete(Customer customer)
-        //{
-        //    CustomerList.Remove(customer);
-        //}
+        public void Delete(Guid IDtoDelete)
+        {
+            var c = CustomerList.Find((item) => IDtoDelete == item.CustomerID);
+            CustomerList.Remove(c);
+        }
+
+        public Customer FetchID(Guid ID)
+        {   
+            return CustomerList.Find((item) => ID == item.CustomerID);
+        }
+
+        public void Update(Customer customer)
+        {
+            var a = FetchID(customer.CustomerID);
+            a.FirstName = customer.FirstName;
+            a.LastName = customer.LastName;
+            a.Phone = customer.Phone;
+            a.Email = customer.Email;
+        }
     }
 }

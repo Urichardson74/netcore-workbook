@@ -20,9 +20,9 @@ namespace Checkpoint1.Controllers
         // GET: Customers
         public IActionResult Index()
         {
-            var customers = _mockDatabaseP.GetAllProviders();
+            var providers = _mockDatabaseP.GetAllProviders();
 
-            return View(provider);
+            return View(providers);
         }
         // GET: /<controller>/
         public IActionResult Create()
@@ -36,28 +36,53 @@ namespace Checkpoint1.Controllers
         {
             if (ModelState.IsValid)
             {
-                _mockDatabaseP.Add();
+                _mockDatabaseP.Add(provider);
                 return RedirectToAction(nameof(Index));
             }
             return View(provider);
         }
 
         // GET: /<controller>/
-        public IActionResult Delete()
+        public IActionResult Edit(Guid ID)
         {
-            return View();
+
+            var a = _mockDatabaseP.FetchID(ID);
+
+            return View(a);
         }
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public IActionResult Delete([Bind("ProviderID,FirstName,LastName,Specialty,Phone,Email")] Customer customer)
+        public IActionResult Edit(Provider provider)
         {
             if (ModelState.IsValid)
             {
-                //_mockDatabase.Delete();
+
+                _mockDatabaseP.Update(provider);
                 return RedirectToAction(nameof(Index));
             }
-            return View(customer);
+            return View(provider);
+        }
+
+        // GET: /<controller>/
+        public IActionResult Delete(Guid ID)
+        {
+            var a = _mockDatabaseP.FetchID(ID);
+
+            return View(a);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public IActionResult Delete([Bind("ProviderID,FirstName,LastName,Specialty,Phone,Email")] Provider provider)
+        {
+            if (ModelState.IsValid)
+            {
+                _mockDatabaseP.Delete(provider.ProviderID);
+                return RedirectToAction(nameof(Index));
+            }
+            return View();
         }
     }
 }
+

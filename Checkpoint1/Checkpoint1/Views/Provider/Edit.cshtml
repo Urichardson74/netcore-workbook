@@ -4,13 +4,13 @@
 @model  BaseProject.Models.Provider
 
 <h2>View1</h2>
-<form asp-controller="Customer" asp-action="RegisterAddress" method="post">
+<form asp-controller="Provider" asp-action="Edit" method="post">
     First Name:   <input asp-for="FirstName" /> <br />
     Last Name:   <input asp-for="LastName" /> <br />
     Specialty:  <input asp-for="Specialty" /> <br />
     Phone:   <input asp-for="Phone" /> <br />
     Email:  <input asp-for="Email" /> <br />
-    <button type="submit">Register</button>
+    <button type="submit">Edit</button>
 </form><div>
     @Html.ActionLink("Back to List", "Index")
 </div>

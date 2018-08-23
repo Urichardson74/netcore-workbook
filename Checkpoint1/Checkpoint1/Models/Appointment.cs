@@ -5,15 +5,23 @@ using System.Linq;
 using System.Threading.Tasks;
 
 namespace BaseProject.Models
+                     
 {
-    public class Appointment //: IValidatableObject
+    public class Appointment
     {
-        [Required]
-        public int ApptID { get; set; }
-        public int CustomerID { get; set; }
-        public int ProviderID { get; set; }
-        public DateTime TimeDate{ get; set; }
+        public enum Days { Monday, Tuesday, Wednesday, Thursday, Friday, Saturday };
 
+        public enum Times { Ten, Eleven, Noon, One, Two, Three, Four, Five, Six };
 
+        public Appointment()
+        {
+            Id = Guid.NewGuid();
+        }
+
+        public Guid Id { get; set; }
+        public string CustomerName { get; set; }
+        public string ProviderName { get; set; }
+        public Days Day { get; set; }
+        public Times Time { get; set; }
     }
 }

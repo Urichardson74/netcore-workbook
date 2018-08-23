@@ -13,7 +13,7 @@ namespace BaseProject.Services
         {
             ProviderList = new List<Provider>()
             {
-                new Provider() { ProviderID = 1, FirstName = "John", LastName = "Doe"},
+                new Provider() { FirstName = "John", LastName = "Doe"},
 
 
             };
@@ -25,12 +25,33 @@ namespace BaseProject.Services
 
         public void Add(Provider provider)
         {
+            provider.ProviderID = Guid.NewGuid();
             ProviderList.Add(provider);
         }
 
-        //public void Delete(Provider provider)
-        //{
-        //    CustomerList.Remove(provider);
-        //}
+
+        public void Delete(Guid IDtoDelete)
+        {
+            var c = ProviderList.Find((item) => IDtoDelete == item.ProviderID);
+            ProviderList.Remove(c);
+        }
+
+        public Provider FetchID(Guid ID)
+        {
+            return ProviderList.Find((item) => ID == item.ProviderID);
+        }
+
+        public void Update(Provider provider)
+        {
+            var a = FetchID(provider.ProviderID);
+            a.FirstName = provider.FirstName;
+            a.LastName = provider.LastName;
+            a.Specialty = provider.Specialty;
+            a.Phone = provider.Phone;
+            a.Email = provider.Email;
+        }
+
     }
 }
+
+
