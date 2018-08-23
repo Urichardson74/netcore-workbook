@@ -31,6 +31,7 @@ namespace BaseProject.Area.Controllers
         // POST: Comment/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
+<<<<<<< HEAD
         [Route("Create")]
         public ActionResult Create(Note note)
         {
@@ -42,6 +43,13 @@ namespace BaseProject.Area.Controllers
             await _context.SaveChangesAsync(cancellationToken);
          
         }
+=======
+        public ActionResult Create(IFormCollection collection)
+        {
+            try
+            {
+                // TODO: Add insert logic here
+>>>>>>> 341d044c2e259b73fa141b0978ffef78d8bb2a1a
 
                 return RedirectToAction(nameof(Index));
             }

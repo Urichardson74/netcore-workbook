@@ -21,7 +21,11 @@ namespace BaseProject
         public void ConfigureServices(IServiceCollection services)
         {
             // Comment out if you do not have a local Sql Server installed
+<<<<<<< HEAD
             services.AddDbContext<ApplicationContext>(opts => opts.UseSqlServer(Configuration.GetConnectionString("BaseProjectHosted")));
+=======
+            services.AddDbContext<ApplicationContext>(opts => opts.UseSqlServer(Configuration.GetConnectionString("BaseProject")));
+>>>>>>> 341d044c2e259b73fa141b0978ffef78d8bb2a1a
             // Uncomment if you do not have a local Sql Server installed
             //services.AddDbContext<ApplicationContext>(opts => opts.UseSqlServer(Configuration.GetConnectionString("BaseProjectHosted")));
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);

@@ -5,8 +5,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using BaseProject.Controllers.Data;
-                 
+
 namespace BaseProject
 {
     public class Startup
@@ -21,20 +20,14 @@ namespace BaseProject
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-<<<<<<< HEAD
-<<<<<<< HEAD
-            services.AddDbContext<ApplicationContext>(OptionsServiceCollectionExtensions => OptionsServiceCollectionExtensions.UseSqlServer(Configuration.GetConnectionString("BaseProject")));
-=======
-=======
->>>>>>> 341d044c2e259b73fa141b0978ffef78d8bb2a1a
+            services.AddTransient<BillingLogic.BillingAdaptor>();
+            services.AddTransient<BillingLogic.BillingFacade>();
+            services.AddTransient<BillingLogic.BillingFactory>();
+
             // Comment out if you do not have a local Sql Server installed
             services.AddDbContext<ApplicationContext>(opts => opts.UseSqlServer(Configuration.GetConnectionString("BaseProject")));
             // Uncomment if you do not have a local Sql Server installed
             //services.AddDbContext<ApplicationContext>(opts => opts.UseSqlServer(Configuration.GetConnectionString("BaseProjectHosted")));
-<<<<<<< HEAD
->>>>>>> 0640ce231b976294e4703e043b158336ce894771
-=======
->>>>>>> 341d044c2e259b73fa141b0978ffef78d8bb2a1a
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
         }
 
@@ -52,7 +45,11 @@ namespace BaseProject
 
             app.UseStaticFiles();
 
-            app.UseMvc();
+            app.UseMvc(routes =>
+            {
+                routes.MapRoute("area", "{area:exists}/{controller}/{action}/{id?}");
+                routes.MapRoute("default", "{controller}/{action}/{id?}");
+            });
         }
     }
 }
