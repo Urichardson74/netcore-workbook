@@ -11,7 +11,7 @@ namespace Checkpoint1.Controllers
     public class Appointment : Controller
     {
         // GET: /<controller>/
-        public IActionResult Appointments()
+        public IActionResult Create()
         {
             return View();
         }

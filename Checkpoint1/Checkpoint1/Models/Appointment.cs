@@ -11,12 +11,8 @@ namespace BaseProject.Models
     {
         public enum Days { Monday, Tuesday, Wednesday, Thursday, Friday, Saturday };
 
-        public enum Times { Ten, Eleven, Noon, One, Two, Three, Four, Five, Six };
+        public enum Times { Ten, Eleven, Twelve, One, Two, Three, Four, Five, Six };
 
-        public Appointment()
-        {
-            Id = Guid.NewGuid();
-        }
 
         public Guid Id { get; set; }
         public string CustomerName { get; set; }

@@ -79,7 +79,7 @@ namespace BaseProject.Controllers
         {
             //TODO: Today's lesson
 
-
+            if work
 
         }
 

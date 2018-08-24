@@ -1,0 +1,51 @@
+﻿@model BaseProject.Models.Appointment
+
+@{
+    ViewData["Title"] = "Create";
+}
+
+<h2>Create Appointment</h2>
+
+
+
+<form asp-action="Create">
+    >
+
+    <label asp-for="CustomerName" class="control-label"></label>
+    <input asp-for="CustomerName" class="form-control" />
+    <label asp-for="ProviderName" class="control-label"></label>
+    <input asp-for="ProviderName" class="form-control" />
+
+    <label asp-for="Day" class="control-label"></label>
+    <select asp-for="Day">
+
+        <option value="1">Monday</option>
+        <option value="2">Tuesday</option>
+        <option value="3">Wednesday</option>
+        <option value="4">Thursday</option>
+        <option value="5">Friday</option>
+        <option value="6">Saturday</option>
+    </select>
+
+
+    <label asp-for="Time"></label>
+    <select asp-for="Time">
+
+        <option value="1">10 AM</option>
+        <option value="2">11 AM</option>
+        <option value="3">12 PM</option>
+        <option value="4">1 PM</option>
+        <option value="5">2 PM</option>
+        <option value="6">3 PM</option>
+        <option value="7">4 PM</option>
+        <option value="8">5 PM</option>
+        <option value="9">5 PM</option>
+    </select>
+
+    <input type="submit" value="Create" class="btn btn-default" />
+
+</form>
+
+    <a asp-action="Index">Back to List</a>
+
+
