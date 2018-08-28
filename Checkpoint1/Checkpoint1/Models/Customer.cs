@@ -18,7 +18,7 @@ namespace BaseProject.Models
         public string Email { get; set; }
     
 
-        public string FullName
+        public string CustomerName
         {
             get
             {
