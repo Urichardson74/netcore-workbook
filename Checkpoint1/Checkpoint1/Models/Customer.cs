@@ -9,7 +9,7 @@ namespace BaseProject.Models
 {
     public class Customer //: IValidatableObject
     {
-
+        public static Guid ID { get; internal set; }
 
         public Guid CustomerID { get; set; }
         public string FirstName { get; set; }

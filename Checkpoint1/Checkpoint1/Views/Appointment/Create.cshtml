@@ -9,42 +9,47 @@
 
 
 <form asp-action="Create">
-    >
-
+    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
     <label asp-for="CustomerID" class="control-label"></label>
     <select asp-for="CustomerID" asp-items="@(new SelectList(ViewBag.CustomerList,"CustomerID","CustomerName"))">
         <option value="">--Please Select a Customer--</option>
     </select>
+    <label asp-for="ProviderID" class="control-label"></label>
+    <select asp-for="ProviderID" asp-items="@(new SelectList(ViewBag.ProviderList,"ProviderID","ProviderName"))">
+        <option value="">--Please Select a Provider--</option>
+    </select>select
     <label asp-for="Day" class="control-label"></label>
     <select asp-for="Day">
 
-        <option value="1">Monday</option>
-        <option value="2">Tuesday</option>
-        <option value="3">Wednesday</option>
-        <option value="4">Thursday</option>
-        <option value="5">Friday</option>
-        <option value="6">Saturday</option>
+        <option value="0">Monday</option>
+        <option value="1">Tuesday</option>
+        <option value="2">Wednesday</option>
+        <option value="3">Thursday</option>
+        <option value="4">Friday</option>
+        <option value="5">Saturday</option>
     </select>
 
 
     <label asp-for="Time"></label>
     <select asp-for="Time">
 
-        <option value="1">10 AM</option>
-        <option value="2">11 AM</option>
-        <option value="3">12 PM</option>
-        <option value="4">1 PM</option>
-        <option value="5">2 PM</option>
-        <option value="6">3 PM</option>
-        <option value="7">4 PM</option>
+        <option value="0">10 AM</option>
+        <option value="1">11 AM</option>
+        <option value="2">12 PM</option>
+        <option value="3">1 PM</option>
+        <option value="4">2 PM</option>
+        <option value="5">3 PM</option>
+        <option value="6">4 PM</option>
+        <option value="7">5 PM</option>
         <option value="8">5 PM</option>
-        <option value="9">5 PM</option>
     </select>
 
     <input type="submit" value="Create" class="btn btn-default" />
 
 </form>
 
-    <a asp-action="Index">Back to List</a>
+<a asp-action="Index">Back to List</a>
 
-
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

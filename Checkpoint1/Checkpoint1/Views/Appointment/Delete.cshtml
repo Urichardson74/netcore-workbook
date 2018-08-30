@@ -1,0 +1,12 @@
+﻿@@{
+    ViewData["Title"] = "Delete Appointment";
+}
+@model  BaseProject.Models.Appointment
+
+<h2>Are you sure you want to delete your appointment for @Html.DisplayFor(model=> model.Day)</h2>
+<form asp-controller="Appointment" asp-action="Delete" method="post">
+    <input type="hidden" asp-for="Id" />
+    <button type="submit">Delete</button>
+</form><div>
+    @Html.ActionLink("Back to List", "Index")
+</div>

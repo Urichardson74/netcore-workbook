@@ -3,11 +3,13 @@ using System.Threading.Tasks;
 using BaseProject.Data;
 using BaseProject.Models;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.EntityFrameworkCore;
 
 namespace BaseProject.Controllers
 {
     [Route("Issue")]
+    [Authorize]
     public class IssueController : Controller
     {
         private readonly ApplicationContext _context;

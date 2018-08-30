@@ -20,5 +20,7 @@ namespace BaseProject.Models
         public Days Day { get; set; }
         public Times Time { get; set; }
         public Guid CustomerID { get; set; }
+        public Guid ProviderID { get; set; }
+
     }
 }

@@ -1,10 +1,12 @@
 ﻿@{
     ViewData["Title"] = "Edit Provider";
 }
-@model  BaseProject.Models.Provider
+@model BaseProject.Models.Provider
 
-<h2>View1</h2>
+<h2>Update Provider</h2>
 <form asp-controller="Provider" asp-action="Edit" method="post">
+    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+    <input type="hidden" asp-for="ProviderID" />
     First Name:   <input asp-for="FirstName" /> <br />
     Last Name:   <input asp-for="LastName" /> <br />
     Specialty:  <input asp-for="Specialty" /> <br />
@@ -14,3 +16,5 @@
 </form><div>
     @Html.ActionLink("Back to List", "Index")
 </div>
+
+@section Scripts {     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");} }

@@ -12,15 +12,15 @@ namespace Checkpoint1.Controllers
 {
     public class ProviderController : Controller
     {
-        private MockDatabaseP _mockDatabaseP;
+        private MockDatabaseP _providerDatabase;
         public ProviderController(MockDatabaseP mockDataP)
         {
-            _mockDatabaseP = mockDataP;
+            _providerDatabase = mockDataP;
         }
         // GET: Customers
         public IActionResult Index()
         {
-            var providers = _mockDatabaseP.GetAllProviders();
+            var providers = _providerDatabase.GetAllProviders();
 
             return View(providers);
         }
@@ -36,7 +36,7 @@ namespace Checkpoint1.Controllers
         {
             if (ModelState.IsValid)
             {
-                _mockDatabaseP.Add(provider);
+                _providerDatabase.Add(provider);
                 return RedirectToAction(nameof(Index));
             }
             return View(provider);
@@ -46,7 +46,7 @@ namespace Checkpoint1.Controllers
         public IActionResult Edit(Guid ID)
         {
 
-            var a = _mockDatabaseP.FetchID(ID);
+            var a = _providerDatabase.FetchID(ID);
 
             return View(a);
         }
@@ -58,7 +58,7 @@ namespace Checkpoint1.Controllers
             if (ModelState.IsValid)
             {
 
-                _mockDatabaseP.Update(provider);
+                _providerDatabase.Update(provider);
                 return RedirectToAction(nameof(Index));
             }
             return View(provider);
@@ -67,7 +67,7 @@ namespace Checkpoint1.Controllers
         // GET: /<controller>/
         public IActionResult Delete(Guid ID)
         {
-            var a = _mockDatabaseP.FetchID(ID);
+            var a = _providerDatabase.FetchID(ID);
 
             return View(a);
         }
@@ -78,7 +78,7 @@ namespace Checkpoint1.Controllers
         {
             if (ModelState.IsValid)
             {
-                _mockDatabaseP.Delete(provider.ProviderID);
+                _providerDatabase.Delete(provider.ProviderID);
                 return RedirectToAction(nameof(Index));
             }
             return View();

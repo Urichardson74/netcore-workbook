@@ -73,6 +73,4 @@ namespace Checkpoint1.Controllers
         }
     }
 
-
-
 }
