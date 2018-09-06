@@ -17,7 +17,7 @@ namespace BaseProject.Areas.Identity
             {
                 services.AddDbContext<IdentityDbContext>(options =>
                     options.UseSqlServer(
-                        context.Configuration.GetConnectionString("BaseProject")));
+                        context.Configuration.GetConnectionString("BaseProjectHosted")));
 
                 services.AddIdentity<ApplicationUser, ApplicationRole>()
                     .AddDefaultUI()

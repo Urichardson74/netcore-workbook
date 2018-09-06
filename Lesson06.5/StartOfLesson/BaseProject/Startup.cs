@@ -6,6 +6,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 
+
 namespace BaseProject
 {
     public class Startup
@@ -20,11 +21,13 @@ namespace BaseProject
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            // Comment out if you do not have a local Sql Server installed
-            services.AddDbContext<ApplicationContext>(opts => opts.UseSqlServer(Configuration.GetConnectionString("BaseProject")));
-            // Uncomment if you do not have a local Sql Server installed
-            //services.AddDbContext<ApplicationContext>(opts => opts.UseSqlServer(Configuration.GetConnectionString("BaseProjectHosted")));
-            services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
+            services.AddAuthentication().AddMicrosoftAccount(opts =>
+            {
+                var settings = Configuration.GetSection("Microsoft").Get<MicrosoftSettings>();
+                opts.ClientId = settings.Key;
+                opts.ClientSecret = settings.Secret;
+                opts.CallbackPath = "/signin-microsoft";
+            });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -41,7 +44,8 @@ namespace BaseProject
             }
 
             app.UseStaticFiles();
-
+            app.UseAuthentication();
+           
             app.UseMvc();
         }
 
@@ -56,5 +60,9 @@ namespace BaseProject
                 }
             }
         }
+    }
+
+    internal class MicrosoftSettings
+    {
     }
 }

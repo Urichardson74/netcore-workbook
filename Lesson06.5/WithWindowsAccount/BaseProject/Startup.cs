@@ -30,7 +30,7 @@ namespace BaseProject
             });
 
             // Comment out if you do not have a local Sql Server installed
-            services.AddDbContext<ApplicationContext>(opts => opts.UseSqlServer(Configuration.GetConnectionString("BaseProject")));
+            services.AddDbContext<ApplicationContext>(opts => opts.UseSqlServer(Configuration.GetConnectionString("BaseProjectHosted")));
             // Uncomment if you do not have a local Sql Server installed
             //services.AddDbContext<ApplicationContext>(opts => opts.UseSqlServer(Configuration.GetConnectionString("BaseProjectHosted")));
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
